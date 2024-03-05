@@ -5,7 +5,7 @@ from PIL import Image
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 # image path
-image_path = "image.jpeg"
+image_path = "image2.jpg"
 image = Image.open(image_path)
 
 extracted_text = pytesseract.image_to_string(image)
