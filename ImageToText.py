@@ -1,24 +1,24 @@
+'''
 # pip install cv2
 # pip install matplotlib
 # pip install numpy
 
-# # Installing the CPU and CUDA
+# Installing the CPU and CUDA
 # pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 # pip install easyocr
-
-# Importing the different libraries
-import cv2
-import numpy as np
+'''
 import easyocr
-import matplotlib.pyplot as plt
 
-img0_path = 'image.jpeg'
+img_path = 'image.jpeg'
 
-# Recognise the text
-def recognize_text(img_path):
-    ''' loads an image and recognizes text. '''
-    reader = easyocr.Reader(['en'])        # For English - 'en'  And,  For Hindi - 'hi'
-    return [text[1] for text in reader.readtext(img_path)]
+def recognize_text(path):
+    '''Loads an image and recognizes text.'''
+    # Initialize EasyOCR Reader with specified parameters
+    reader = easyocr.Reader(['en'], gpu=True)
+    # Recognize text with specified parameters
+    return reader.readtext(path, batch_size=1, detail=0, allowlist='.%$() abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 
-result = recognize_text(img0_path)
-print(result)
+result = recognize_text(img_path)
+# Print the recognized text
+for text in result:
+    print(text)

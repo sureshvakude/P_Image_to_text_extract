@@ -1,0 +1,27 @@
+# pip install cv2
+# pip install matplotlib
+# pip install numpy
+
+# Installing the CPU and CUDA
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# pip install easyocr
+
+# Importing the different libraries
+import cv2
+import numpy as np
+import easyocr
+import matplotlib.pyplot as plt
+import os
+
+img0_path = 'image.jpeg'
+
+# Set CUDA_VISIBLE_DEVICES to use GPU 1
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+
+def recognize_text(img_path):
+    '''Loads an image and recognizes text.'''
+    reader = easyocr.Reader(['en'], gpu=True) # Ensure GPU is used
+    return reader.readtext(img_path, batch_size=1)  # Reduce batch size
+
+result = recognize_text(img0_path)
+print(result)
