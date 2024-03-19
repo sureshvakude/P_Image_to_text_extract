@@ -1,15 +1,24 @@
-import pytesseract
-from PIL import Image
+# pip install cv2
+# pip install matplotlib
+# pip install numpy
 
-# path of the installed tesseract.exe 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# # Installing the CPU and CUDA
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# pip install easyocr
 
-# image path
-image_path = "image2.jpg"
-image = Image.open(image_path)
+# Importing the different libraries
+import cv2
+import numpy as np
+import easyocr
+import matplotlib.pyplot as plt
 
-extracted_text = pytesseract.image_to_string(image)
-cleaned_text = extracted_text.strip()
+img0_path = 'image.jpeg'
 
-print("Extracted text:")
-print(cleaned_text)
+# Recognise the text
+def recognize_text(img_path):
+    ''' loads an image and recognizes text. '''
+    reader = easyocr.Reader(['en'])        # For English - 'en'  And,  For Hindi - 'hi'
+    return [text[1] for text in reader.readtext(img_path)]
+
+result = recognize_text(img0_path)
+print(result)
